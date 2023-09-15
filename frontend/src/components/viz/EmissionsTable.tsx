@@ -2,7 +2,6 @@ import React from "react"
 import { ProjectType } from "../../frontendTypes"
 import {Table, Badge} from 'react-bootstrap'
 import ItemWithOverlay from "../ItemWithOverlay"
-import OutputNumberTd from "../OutputNumberTd"
 
 export default function EmissionsTable (props: {
     emissionsData: {[key: string]: {co2: number[], energy: number[]}},
@@ -39,7 +38,7 @@ export default function EmissionsTable (props: {
                     return (<tr key={index}>
                         <td><Badge bg="disabled"><span className="item"><span>{vtype}</span></span></Badge></td>
                         {props.project.referenceYears && props.project.referenceYears.map((y, yearIndex) => (
-                            <OutputNumberTd key={yearIndex} value={vehicle.co2[yearIndex]} decimals={2}></OutputNumberTd>
+                            <td key={yearIndex}>{vehicle.co2[yearIndex].toFixed(2)}</td>
                         ))}
                     </tr>)
                     

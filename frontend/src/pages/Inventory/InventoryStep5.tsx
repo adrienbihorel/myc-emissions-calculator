@@ -11,7 +11,6 @@ import ValidSource from '../../components/ValidSource'
 import ProjectStepContainerWrapper from '../../components/ProjectStepContainerWrapper'
 import ItemWithOverlay from '../../components/ItemWithOverlay'
 import EditEmissionFactors from '../../components/EditEmissionFactors'
-import OutputNumberTd from '../../components/OutputNumberTd'
 
 export default function InventoryStep5(){
     const { keycloak, initialized } = useKeycloak();
@@ -133,8 +132,8 @@ export default function InventoryStep5(){
             <ProjectStepContainerWrapper project={project} stage="Inventory" currentStep={stepNumber} noteValue={inputData.note} setInputData={setInputData}>
                 <h1>Top down validation</h1>
                 <DescAndNav 
-                    prevNav={{link: '/project/' + project.id + '/Inventory/step/' + (stepNumber - 1), content: "Prev", showArrow: true, variant: "secondary"}}
-                    nextNav={{trigger: nextTrigger, content: "Next", showArrow: true, variant: "primary"}}
+                    prevNav={{link: '/project/' + project.id + '/Inventory/step/' + (stepNumber - 1), content: "<- Prev.", variant: "secondary"}}
+                    nextNav={{trigger: nextTrigger, content: "Next ->", variant: "primary"}}
                 >
                     <div className="text desc">
                         <p>
@@ -210,7 +209,9 @@ export default function InventoryStep5(){
                                     <td>
                                         <Form.Control value={value} onChange={e => updateInput("energy", networkName, ftype, e.target.value)}></Form.Control>
                                     </td>
-                                    <OutputNumberTd value={computedValue}></OutputNumberTd>
+                                    <td>
+                                        {computedValue}
+                                    </td>
                                     <td>{Math.round(computedValue * 100 / parseFloat(value) - 100) || '0'}%</td>
                                 </tr>)
                             }
@@ -283,7 +284,9 @@ export default function InventoryStep5(){
                                     <td>
                                         <Form.Control value={value} onChange={e => updateInput("emissions", networkName, ftype, e.target.value)}></Form.Control>
                                     </td>
-                                    <OutputNumberTd value={computedValue}></OutputNumberTd>
+                                    <td>
+                                        {computedValue}
+                                    </td>
                                     <td>{Math.round(parseFloat(computedValue) * 100 / parseFloat(value) - 100) || '0'}%</td>
                                 </tr>)
                             }

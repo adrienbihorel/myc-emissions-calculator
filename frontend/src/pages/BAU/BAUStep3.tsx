@@ -10,7 +10,6 @@ import DescAndNav from '../../components/DescAndNav'
 import ValidSource from '../../components/ValidSource'
 import ProjectStepContainerWrapper from '../../components/ProjectStepContainerWrapper'
 import ItemWithOverlay from '../../components/ItemWithOverlay'
-import OutputNumberTd from '../../components/OutputNumberTd'
 
 export default function BAUStep3(){
     const { keycloak, initialized } = useKeycloak();
@@ -155,8 +154,8 @@ export default function BAUStep3(){
                 {error && <Alert variant='danger'>{error}</Alert>}
                 {sourceWarning && <Alert variant='warning'>Warning: At least one source is missing. Please add missing sources below or click the Next button again to ignore this warning.</Alert>}
                 <DescAndNav 
-                    prevNav={{link: '/project/' + project.id + '/BAU/step/' + (stepNumber - 1), content: "Prev", showArrow: true, variant: "secondary"}}
-                    nextNav={{trigger: nextTrigger, content: "Next", showArrow: true, variant: "primary"}}
+                    prevNav={{link: '/project/' + project.id + '/BAU/step/' + (stepNumber - 1), content: "<- Prev.", variant: "secondary"}}
+                    nextNav={{trigger: nextTrigger, content: "Next ->", variant: "primary"}}
                 >
                     <div className="text desc">
                         <p>Once transport activity i.e. mileage by mode and fuel is known, it needs to be multiplied with adequate fuel consumption factors.</p>
@@ -196,7 +195,7 @@ export default function BAUStep3(){
                                         fuelJsx.push(<tr key={vtype + ftype}>
                                             {i===0 && <td rowSpan={ftypes.length} style={{verticalAlign: "top"}}><Badge bg="disabled"><span className="item"><span>{vtype}</span></span></Badge></td>}
                                             <td><Badge bg="disabled"><span className="item"><span>{ftype}</span></span></Badge></td>
-                                            <OutputNumberTd value={invCons} decimals={1}></OutputNumberTd>
+                                            <td>{invCons}</td>
                                             <td>
                                                 {consSource 
                                                 ? <ValidSource source={consSource} onClick={(e:any) => configureSource(vtype, ftype)}/>
